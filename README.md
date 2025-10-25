@@ -69,7 +69,7 @@ The constructor interface for data types.
 ```typescript
 import { DataConstructor } from '@typedly/data';
 
-export const ctor: DataConstructor<number, DataShape<number>, DataShape<number>, any[]> = TestData;
+export const ctor: DataConstructor<number, DataShape<number>, any[]> = TestData;
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-constructor.interface.ts)
