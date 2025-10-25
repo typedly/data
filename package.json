@@ -2,7 +2,7 @@
   "name": "@typedly/data",
   "version": "1.0.0",
   "author": "wwwdev.io <dev@wwwdev.io>",
-  "description": "A TypeScript type definitions package for data package.",
+  "description": "A TypeScript type definitions package for @typescript-package/data.",
   "license": "MIT",
   "publishConfig": {
     "access": "public",
