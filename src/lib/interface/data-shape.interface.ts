@@ -2,12 +2,12 @@
  * @description The shape of a `Data` type.
  * @export
  * @interface DataShape
- * @template Type 
+ * @template Value The value type.
  */
-export interface DataShape<Type> {
-  get value(): Type;
+export interface DataShape<Value> {
+  get value(): Value;
   clear(): this;
   destroy(): this;
   lock(): this;
-  set(value: Type): this;
+  set(value: Value): this;
 }
