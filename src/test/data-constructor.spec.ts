@@ -1,4 +1,4 @@
-import { DataConstructor } from "@typedly/constructor";
+import { DataConstructor } from "../lib";
 import { DataShape } from "../lib";
 
 class TestData implements DataShape<number> {
@@ -7,7 +7,7 @@ class TestData implements DataShape<number> {
   public clear(): this { return this; }
   public destroy(): this { return this; }
   public lock(): this { return this; }
-  public set(): this { return this; }
+  public set(value: number): this { return this; }
 }
 
-export const ctor: DataConstructor<number, DataShape<number>, DataShape<number>, any[]> = TestData;
+export const ctor: DataConstructor<number, DataShape<number>, any[]> = TestData;
