@@ -87,7 +87,7 @@ class TestData implements DataShape<number> {
   public clear(): this { return this; }
   public destroy(): this { return this; }
   public lock(): this { return this; }
-  public set(): this { return this; }
+  public set(value: number): this { return this; }
 }
 ```
 
