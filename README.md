@@ -42,6 +42,8 @@ Peer dependencies
 npm install @typedly/constructor --save-peer
 ```
 
+The package
+
 ```bash
 npm install @typedly/data --save-peer
 ```
@@ -66,6 +68,8 @@ The constructor interface for data types.
 
 ```typescript
 import { DataConstructor } from '@typedly/data';
+
+export const ctor: DataConstructor<number, DataShape<number>, DataShape<number>, any[]> = TestData;
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-constructor.interface.ts)
@@ -76,6 +80,15 @@ The shape of a `Data` type.
 
 ```typescript
 import { DataShape } from '@typedly/data';
+
+class TestData implements DataShape<number> {
+  get value(): number { return this.initialValue; }
+  constructor(private initialValue: number) {}
+  public clear(): this { return this; }
+  public destroy(): this { return this; }
+  public lock(): this { return this; }
+  public set(): this { return this; }
+}
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-shape.interface.ts)
@@ -87,7 +100,19 @@ import { DataShape } from '@typedly/data';
 The input type for data constructors, with arguments support.
 
 ```typescript
-import { DataConstructorInput } from '@typedly/data';
+import { DataConstructorInput, DataShape } from '@typedly/data';
+
+function createData<Value, DataType extends DataShape<Value>>(
+  input: DataConstructorInput<Value, DataType>,
+  value: Value
+): DataType {
+  if (Array.isArray(input)) {
+    const [Ctor, ...args] = input;
+    return new Ctor(value, ...args);
+  } else {
+    return new input(value);
+  }
+}
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-input.type.ts)
