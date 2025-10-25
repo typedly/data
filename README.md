@@ -3,18 +3,18 @@
   <img
     src="https://avatars.githubusercontent.com/u/189665258?s=400&u=712e292bae048947d1f7d2020d7d38875c40e63a&v=4"
     width="20%"
-    title="@typedly/data - A TypeScript type definitions package for data package."
+    title="@typedly/data - A TypeScript type definitions package for @typescript-package/data."
   />
 </a>
 
-## typedly/data
+## @typedly/data
 
 <!-- npm badge -->
 [![npm version][typedly-npm-badge-svg]][typedly-npm-badge]
 [![GitHub issues][typedly-badge-issues]][typedly-issues]
 [![GitHub license][typedly-badge-license]][typedly-license]
 
-A **TypeScript** type definitions package for **data** package.
+A **TypeScript** type definitions package for [**@typescript-package/data**](https://github.com/typescript-package/data).
 
 ## Table of contents
 
