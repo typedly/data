@@ -1,15 +1,16 @@
-import { Constructor } from '@typedly/constructor';
+import { DataConstructor as BaseDataConstructor } from '@typedly/constructor';
 import { DataShape } from './data-shape.interface';
 /**
  * @description The constructor interface for data types.
  * @export
  * @interface DataConstructor
  * @template Value 
- * @template {DataCore<Value>} DataType 
- * @template {readonly any[]} Args 
+ * @template {DataShape<Value>} Instance The instance.
+ * @template {readonly any[]} [Args=any[]] 
+ * @extends {BaseDataConstructor<Value, DataShape<Value>, Instance, [...Args]>}
  */
 export interface DataConstructor<
   Value,
-  DataType extends DataShape<Value>,
+  Instance extends DataShape<Value>,
   Args extends readonly any[] = any[]
-> extends Constructor<DataType, [Value, ...Args]> {}
+> extends BaseDataConstructor<Value, DataShape<Value>, Instance, [...Args]> {}
