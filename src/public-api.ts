@@ -9,5 +9,5 @@ export type {
   ValueShape,
   // Type.
   DataConstructorInput,
-  ValueConstructorInput,
+  DataConstructorTuple,
 } from './lib';

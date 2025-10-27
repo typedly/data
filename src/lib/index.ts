@@ -6,5 +6,5 @@ export type {
 } from './interface';
 export type {
   DataConstructorInput,
-  ValueConstructorInput
+  DataConstructorTuple
 } from './type';
