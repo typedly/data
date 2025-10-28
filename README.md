@@ -179,7 +179,7 @@ class TestData implements DataShape<number> {
 import { ValueConstructor } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-constructor.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-constructor.interface.ts)
 
 #### `ValueShape`
 
