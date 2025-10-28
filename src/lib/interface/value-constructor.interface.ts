@@ -7,7 +7,7 @@ import { ValueShape } from "./value-shape.interface";
  * @interface ValueConstructor
  * @template Value The value type.
  * @template {ValueShape<Value>} Instance The instance.
- * @template {readonly any[]} [Args=any[]] 
+ * @template {readonly any[]} [Args=any[]] Additional arguments passed to the constructor.
  * @extends {BaseDataConstructor<Value, ValueShape<Value>, Instance, [...Args]>}
  */
 export interface ValueConstructor<
