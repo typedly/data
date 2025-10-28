@@ -1,7 +1,10 @@
 export type {
   DataConstructor,
-  DataShape
+  DataShape,
+  ValueConstructor,
+  ValueShape
 } from './interface';
 export type {
-  DataConstructorInput
+  DataConstructorInput,
+  DataConstructorTuple
 } from './type';

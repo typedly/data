@@ -23,8 +23,12 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
   - [Interface](#interface)
     - [`DataConstructor`](#dataconstructor)
     - [`DataShape`](#datashape)
+    - [`ValueConstructor`](#valueconstructor)
+    - [`ValueShape`](#valueshape)
   - [Type](#type)
     - [`DataConstructorInput`](#dataconstructorinput)
+    - [`DataConstructorTuple`](#dataconstructortuple)
+- [Full example usage](#full-example-usage)
 - [Contributing](#contributing)
 - [Support](#support)
 - [Code of Conduct](#code-of-conduct)
@@ -55,8 +59,11 @@ import {
   // Interface.
   DataConstructor,
   DataShape,
+  ValueConstructor,
+  ValueShape,
   // Type.
-  DataConstructorInput
+  DataConstructorInput,
+  DataConstructorTuple,
 } from '@typedly/data';
 ```
 
@@ -67,9 +74,82 @@ import {
 The constructor interface for data types.
 
 ```typescript
-import { DataConstructor } from '@typedly/data';
+import { DataConstructor, DataShape } from '@typedly/data';
 
-export const ctor: DataConstructor<number, DataShape<number>, any[]> = TestData;
+// Import DataShape and DataConstructor.
+// Create a data class that implements `DataShape` of `Type`.
+export class ProfileData<
+  Value extends { age: number, name: string }
+> implements DataShape<Value> {
+
+  get value(): Value {
+    return {
+      age: this.#age,
+      name: this.#name
+    } as Value;
+  }
+
+  #age;
+  #name;
+  constructor(value: Value, ...args: any[]) {
+    console.log(`Instantiated DataConstructor`, value, ...args);
+    this.#age = value.age;
+    this.#name = value.name;
+  }
+
+  set(value: Value): this { this.validate(value); return this; }
+  clear(): this { return this; }
+  destroy(): this { return this; }
+  lock(): this { return this; };
+  validate(value: Value): boolean {
+    return true;
+  }
+}
+
+// Create `ProfileClass` with customizable data.
+export class ProfileClass<
+  Value extends { age: number, name: string },
+  DataType extends DataShape<Value>,
+  Args extends any[]
+> {
+
+  public get age(): Value['age'] {
+    return this.#data.value.age;
+  }
+
+  public get name(): Value['name'] {
+    return this.#data.value.name;
+  }
+
+  public get data() {
+    return this.#data;
+  }
+
+  #data: DataType;
+
+  constructor(value: Value, dataCtor: DataConstructor<Value, DataType>);
+  constructor(value: Value, dataCtor: [DataConstructor<Value, DataType>, ...Args]);
+  constructor(value: Value, dataCtor: any) {
+    // ...implementation
+    console.log(`DataConstructor`, value, dataCtor[1]);
+    this.#data = Array.isArray(dataCtor)
+      ? new dataCtor[0](value, ...dataCtor.slice(1))
+      : new dataCtor(value);
+  }
+}
+
+// Initialize.
+// const frankProfile: ProfileClass<object, ProfileData<object>, any[]>
+const frankProfile = new ProfileClass({ age: 37, name: 'Frank' }, ProfileData);
+
+frankProfile.age; // 37
+frankProfile.name; // Frank
+
+// Set the data.
+frankProfile.data.set({ age: 37, name: 'Frank' });
+frankProfile.data.clear();
+frankProfile.data.lock();
+frankProfile.data.value;
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-constructor.interface.ts)
@@ -93,6 +173,24 @@ class TestData implements DataShape<number> {
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-shape.interface.ts)
 
+#### `ValueConstructor`
+
+```typescript
+import { ValueConstructor } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-constructor.interface.ts)
+
+#### `ValueShape`
+
+The shape of a `Value` type.
+
+```typescript
+import { ValueShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-shape.interface.ts)
+
 ### Type
 
 #### `DataConstructorInput`
@@ -100,22 +198,138 @@ class TestData implements DataShape<number> {
 The input type for data constructors, with arguments support.
 
 ```typescript
-import { DataConstructorInput, DataShape } from '@typedly/data';
-
-function createData<Value, DataType extends DataShape<Value>>(
-  input: DataConstructorInput<Value, DataType>,
-  value: Value
-): DataType {
-  if (Array.isArray(input)) {
-    const [Ctor, ...args] = input;
-    return new Ctor(value, ...args);
-  } else {
-    return new input(value);
-  }
-}
+import { DataConstructorInput } from '@typedly/data';
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-input.type.ts)
+
+#### `DataConstructorTuple`
+
+The input type for data constructors, with arguments support.
+
+```typescript
+import { DataConstructorTuple } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-tuple.type.ts)
+
+### Full example usage
+
+```typescript
+import { DataConstructor, DataShape, ValueConstructor, ValueShape } from '@typedly/data';
+
+// Import ValueShape and ValueConstructor.
+// Create a profile data value.
+export class ProfileDataValue<
+  Type extends { age: number, name: string },
+  Args extends any[] = any[]
+> implements ValueShape<Type> {
+  get value(): Type {
+    return {
+      age: this.#age,
+      name: this.#name
+    } as Type;
+  }
+
+  #age: Type['age'];
+  #name: Type['name'];
+
+  constructor(value: Type, ...args: Args) {
+    console.log(`Instantiated ValueConstructor`, value, ...args);
+    this.#age = value.age;
+    this.#name = value.name;
+  }
+
+  set(value: Type): this { return this; }
+}
+
+export class ProfileDataOfValue<
+  Value extends { age: number, name: string },
+  Args extends any[] = any[],
+  ValueInstance extends ValueShape<Value> = ProfileDataValue<Value, Args>,
+> implements DataShape<Value> {
+
+  get value(): Value {
+    return {
+    } as Value;
+  }
+
+  get valueInstance(): ValueInstance {
+    return this.#value;
+  }
+
+  #value;
+  constructor(
+    value: Value,
+    valueCtor: ValueConstructor<Value, ValueInstance, Args> = ProfileDataValue<Value, Args> as any,
+    ...args: Args
+  ) {
+    console.log(`Instantiated DataConstructor`, value, ...args);
+    this.#value = new valueCtor(value, ...args);
+  }
+
+  set(value: Value): this { this.validate(value); return this; }
+  clear(): this { return this; }
+  destroy(): this { return this; }
+  lock(): this { return this; };
+  validate(value: Value): boolean {
+    return true;
+  }
+}
+
+// const profileDataOfValue: ProfileDataOfValue<{
+//     age: number;
+//     name: string;
+// }, ProfileDataValue<{
+//     age: number;
+//     name: string;
+// }, []>, []>
+const profileDataOfValue = new ProfileDataOfValue({
+  age: 37,
+  name: 'Mark'
+}, ProfileDataValue);
+
+const dataSymbol = Symbol('data');
+
+// Create `ProfileClass` with customizable data.
+export class ProfileClass<
+  Value extends { age: number, name: string },
+  DataType extends DataShape<Value>,
+  Args extends any[]
+> {
+
+  public get age(): Value['age'] {
+    return this.#data.value.age;
+  }
+
+  public get name(): Value['name'] {
+    return this.#data.value.name;
+  }
+
+  public get [dataSymbol]() {
+    return this.#data;
+  }
+
+  #data: DataType;
+
+  constructor(value: Value, dataCtor: DataConstructor<Value, DataType, Args>);
+  constructor(value: Value, dataCtor: [DataConstructor<Value, DataType, Args>, ...Args]);
+  constructor(value: Value, dataCtor: any) {
+    // ...implementation
+    console.log(`DataConstructor`, value, dataCtor[1]);
+    this.#data = Array.isArray(dataCtor)
+      ? new dataCtor[0](value, ...dataCtor.slice(1))
+      : new dataCtor(value);
+  }
+}
+
+const markProfile = new ProfileClass({ age: 37, name: 'Mark' }, ProfileDataOfValue);
+
+markProfile.age // 37
+markProfile.name // Mark
+markProfile[dataSymbol].value // { age, name }
+markProfile[dataSymbol].valueInstance.set({ age: 27, name: 'Frank' });
+```
 
 ## Contributing
 
@@ -209,7 +423,7 @@ MIT © typedly ([license][typedly-license])
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fdata.svg
+  [typedly-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
   [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
 
 <!-- GIT -->
