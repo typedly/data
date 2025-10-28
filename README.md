@@ -423,7 +423,7 @@ MIT © typedly ([license][typedly-license])
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/js/@typedly%2Fdata.svg
+  [typedly-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
   [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
 
 <!-- GIT -->
