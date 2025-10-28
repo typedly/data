@@ -133,7 +133,7 @@ export class ProfileClass<
     // ...implementation
     console.log(`DataConstructor`, value, dataCtor[1]);
     this.#data = Array.isArray(dataCtor)
-      ? new dataCtor[0](value, ...dataCtor.splice(1))
+      ? new dataCtor[0](value, ...dataCtor.slice(1))
       : new dataCtor(value);
   }
 }
