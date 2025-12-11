@@ -1,3 +1,4 @@
+// Interface.
 import { DataConstructor as BaseDataConstructor } from '@typedly/constructor';
 import { DataShape } from './data-shape.interface';
 /**
