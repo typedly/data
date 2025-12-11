@@ -3,11 +3,14 @@
  */
 export type {
   // Interface.
+  DataAdapter,
   DataConstructor,
   DataShape,
   ValueConstructor,
   ValueShape,
   // Type.
+  AsyncReturn,
   DataConstructorInput,
   DataConstructorTuple,
+  IterValue
 } from './lib';

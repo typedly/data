@@ -16,18 +16,26 @@
 
 A **TypeScript** type definitions package for [**@typescript-package/data**](https://github.com/typescript-package/data).
 
+## Features
+
+- **Adapter**: Optional data adapter to customize managing underlying data.
+- **Shape**: The default shape for data of any `T` type with conditional async.
+
 ## Table of contents
 
 - [Installation](#installation)
 - [Api](#api)
   - [Interface](#interface)
+    - [`DataAdapter`](#dataadapter)
     - [`DataConstructor`](#dataconstructor)
     - [`DataShape`](#datashape)
     - [`ValueConstructor`](#valueconstructor)
     - [`ValueShape`](#valueshape)
   - [Type](#type)
+    - [`AsyncReturn`](#asyncreturn)
     - [`DataConstructorInput`](#dataconstructorinput)
     - [`DataConstructorTuple`](#dataconstructortuple)
+    - [`IterValue`](#itervalue)
 - [Full example usage](#full-example-usage)
 - [Contributing](#contributing)
 - [Support](#support)
@@ -57,17 +65,30 @@ npm install @typedly/data --save-peer
 ```typescript
 import {
   // Interface.
+  DataAdapter,
   DataConstructor,
   DataShape,
   ValueConstructor,
   ValueShape,
   // Type.
+  AsyncReturn,
   DataConstructorInput,
   DataConstructorTuple,
+  IterValue
 } from '@typedly/data';
 ```
 
 ### Interface
+
+#### `DataAdapter`
+
+The adapter interface for data types.
+
+```typescript
+import { DataAdapter } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-adapter.interface.ts)
 
 #### `DataConstructor`
 
@@ -193,6 +214,16 @@ import { ValueShape } from '@typedly/data';
 
 ### Type
 
+#### `AsyncReturn`
+
+The conditional return type for async methods.
+
+```typescript
+import { AsyncReturn } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/async-return.type.ts)
+
 #### `DataConstructorInput`
 
 The input type for data constructors, with arguments support.
@@ -212,6 +243,16 @@ import { DataConstructorTuple } from '@typedly/data';
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-tuple.type.ts)
+
+#### `IterValue`
+
+The iterated value type.
+
+```typescript
+import { IterValue } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.type.ts)
 
 ### Full example usage
 
