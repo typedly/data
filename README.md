@@ -21,13 +21,16 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 - [Installation](#installation)
 - [Api](#api)
   - [Interface](#interface)
+    - [`DataAdapter`](#dataadapter)
     - [`DataConstructor`](#dataconstructor)
     - [`DataShape`](#datashape)
     - [`ValueConstructor`](#valueconstructor)
     - [`ValueShape`](#valueshape)
   - [Type](#type)
+    - [`AsyncReturn`](#asyncreturn)
     - [`DataConstructorInput`](#dataconstructorinput)
     - [`DataConstructorTuple`](#dataconstructortuple)
+    - [`IterValue`](#itervalue)
 - [Full example usage](#full-example-usage)
 - [Contributing](#contributing)
 - [Support](#support)
@@ -57,17 +60,28 @@ npm install @typedly/data --save-peer
 ```typescript
 import {
   // Interface.
+  DataAdapter,
   DataConstructor,
   DataShape,
   ValueConstructor,
   ValueShape,
   // Type.
+  AsyncReturn,
   DataConstructorInput,
   DataConstructorTuple,
+  IterValue
 } from '@typedly/data';
 ```
 
 ### Interface
+
+#### `DataAdapter`
+
+```typescript
+import { DataAdapter } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-adapter.interface.ts)
 
 #### `DataConstructor`
 
@@ -193,6 +207,14 @@ import { ValueShape } from '@typedly/data';
 
 ### Type
 
+#### `AsyncReturn`
+
+```typescript
+import { AsyncReturn } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/async-return.interface.ts)
+
 #### `DataConstructorInput`
 
 The input type for data constructors, with arguments support.
@@ -212,6 +234,14 @@ import { DataConstructorTuple } from '@typedly/data';
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-tuple.type.ts)
+
+#### `IterValue`
+
+```typescript
+import { IterValue } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.interface.ts)
 
 ### Full example usage
 
