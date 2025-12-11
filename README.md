@@ -16,6 +16,11 @@
 
 A **TypeScript** type definitions package for [**@typescript-package/data**](https://github.com/typescript-package/data).
 
+## Features
+
+- **Adapter**: Optional data adapter to customize managing underlying data.
+- **Shape**: The default shape for data of any `T` type with conditional async.
+
 ## Table of contents
 
 - [Installation](#installation)
@@ -76,6 +81,8 @@ import {
 ### Interface
 
 #### `DataAdapter`
+
+The adapter interface for data types.
 
 ```typescript
 import { DataAdapter } from '@typedly/data';
@@ -209,11 +216,13 @@ import { ValueShape } from '@typedly/data';
 
 #### `AsyncReturn`
 
+The conditional return type for async methods.
+
 ```typescript
 import { AsyncReturn } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/async-return.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/async-return.type.ts)
 
 #### `DataConstructorInput`
 
@@ -237,11 +246,13 @@ import { DataConstructorTuple } from '@typedly/data';
 
 #### `IterValue`
 
+The iterated value type.
+
 ```typescript
 import { IterValue } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.type.ts)
 
 ### Full example usage
 
