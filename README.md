@@ -103,7 +103,7 @@ export class ProfileData<
   Value extends { age: number, name: string }
 > implements DataShape<Value> {
 
-  get value(): Value {
+  public get value(): Value {
     return {
       age: this.#age,
       name: this.#name
@@ -118,13 +118,12 @@ export class ProfileData<
     this.#name = value.name;
   }
 
-  set(value: Value): this { this.validate(value); return this; }
-  clear(): this { return this; }
-  destroy(): this { return this; }
-  lock(): this { return this; };
-  validate(value: Value): boolean {
-    return true;
-  }
+  public clear(): this { return this; }
+  public destroy(): this { return this; }
+  public lock(): this { return this; };
+  public getValue(): Value { return this.value; }
+  public setValue(value: Value): this { this.validate(value); return this; }
+  public validate(value: Value): boolean { return true; }
 }
 
 // Create `ProfileClass` with customizable data.
@@ -167,10 +166,16 @@ frankProfile.age; // 37
 frankProfile.name; // Frank
 
 // Set the data.
-frankProfile.data.set({ age: 37, name: 'Frank' });
+frankProfile.data.setValue({ age: 37, name: 'Frank' });
 frankProfile.data.clear();
 frankProfile.data.lock();
 frankProfile.data.value;
+
+// Initialize with arguments.
+const markProfile = new ProfileClass(
+  { age: 27, name: 'Mark' },
+  [ProfileData, 'private', true]
+);
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-constructor.interface.ts)
@@ -182,13 +187,17 @@ The shape of a `Data` type.
 ```typescript
 import { DataShape } from '@typedly/data';
 
-class TestData implements DataShape<number> {
-  get value(): number { return this.initialValue; }
-  constructor(private initialValue: number) {}
-  public clear(): this { return this; }
-  public destroy(): this { return this; }
-  public lock(): this { return this; }
-  public set(value: number): this { return this; }
+// Create a simple data class with value as property.
+export class TestData<Type> implements DataShape<Type> {
+  get value(): Type { return 27 as Type; }
+  clear(): this { return this; }
+  destroy(): this { return this; }
+  getValue(): Type { return 27 as Type; }
+  lock(): this { return this; };
+  setValue(value: Type): this { return this; }
+  constructor(value: Type, ...args: any[]) {
+    console.log(`Instantiated DataConstructor`, value, ...args);
+  }
 }
 ```
 
@@ -309,7 +318,10 @@ export class ProfileDataOfValue<
     this.#value = new valueCtor(value, ...args);
   }
 
-  set(value: Value): this { this.validate(value); return this; }
+  setValue(value: Value): this { this.validate(value); return this; }
+  getValue(): Value {
+    return this.#value.value;
+  }
   clear(): this { return this; }
   destroy(): this { return this; }
   lock(): this { return this; };
@@ -383,10 +395,11 @@ If you find this package useful and would like to support its and general develo
 Support via:
 
 - [Stripe](https://donate.stripe.com/dR614hfDZcJE3wAcMM)
-- [Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)
+- ~~[Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)~~
 - [GitHub](https://github.com/sponsors/angular-package/sponsorships?sponsor=sciborrudnicki&tier_id=83618)
 - [DonorBox](https://donorbox.org/become-a-sponsor-to-the-angular-package?default_interval=o)
 - [Patreon](https://www.patreon.com/checkout/angularpackage?rid=0&fan_landing=true&view_as=public)
+- [4Fund](https://4fund.com/bruubs)
 
 or via Trust Wallet
 
