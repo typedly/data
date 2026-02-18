@@ -11,8 +11,9 @@ export interface DataShape<T, Async extends boolean = false> {
   value: T;
   clear(): AsyncReturn<Async, this>;
   destroy(): AsyncReturn<Async, this>;
+  getValue(): AsyncReturn<Async, T>;
   lock(): this;
-  set(value: T): AsyncReturn<Async, this>;
+  setValue(value: T): AsyncReturn<Async, this>;
   [Symbol.toStringTag]?: string;
   [Symbol.iterator]?(): IterableIterator<IterValue<T>>;
   [Symbol.asyncIterator]?(): AsyncIterableIterator<IterValue<T>>;
