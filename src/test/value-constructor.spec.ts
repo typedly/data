@@ -50,7 +50,10 @@ export class ProfileDataOfValue<
     this.#value = new valueCtor(value, ...args);
   }
 
-  set(value: Value): this { this.validate(value); return this; }
+  setValue(value: Value): this { this.validate(value); return this; }
+  getValue(): Value {
+    return this.#value.value;
+  }
   clear(): this { return this; }
   destroy(): this { return this; }
   lock(): this { return this; };
