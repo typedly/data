@@ -3,7 +3,10 @@ import { DataShape } from "../lib";
 
 export class TestData<Type> implements DataShape<Type> {
   get value(): Type { return 27 as Type; }
-  set(value: Type): this { return this; }
+  setValue(value: Type): this { return this; }
+  getValue(): Type {
+    return 27 as Type;
+  }
   clear(): this { return this; }
   destroy(): this { return this; }
   lock(): this { return this; };

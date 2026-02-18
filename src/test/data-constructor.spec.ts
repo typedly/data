@@ -1,4 +1,4 @@
-import { DataConstructor, DataShape, ValueConstructor, ValueShape } from "../lib";
+import { DataConstructor, DataShape } from "../lib";
 
 // Import DataShape and DataConstructor.
 // Create a data class that implements `DataShape` of `Type`.
@@ -6,7 +6,7 @@ export class ProfileData<
   Value extends { age: number, name: string }
 > implements DataShape<Value> {
 
-  get value(): Value {
+  public get value(): Value {
     return {
       age: this.#age,
       name: this.#name
@@ -21,13 +21,12 @@ export class ProfileData<
     this.#name = value.name;
   }
 
-  set(value: Value): this { this.validate(value); return this; }
-  clear(): this { return this; }
-  destroy(): this { return this; }
-  lock(): this { return this; };
-  validate(value: Value): boolean {
-    return true;
-  }
+  public clear(): this { return this; }
+  public destroy(): this { return this; }
+  public lock(): this { return this; };
+  public getValue(): Value { return this.value; }
+  public setValue(value: Value): this { this.validate(value); return this; }
+  public validate(value: Value): boolean { return true; }
 }
 
 // Create `ProfileClass` with customizable data.
@@ -70,7 +69,7 @@ frankProfile.age; // 37
 frankProfile.name; // Frank
 
 // Set the data.
-frankProfile.data.set({ age: 37, name: 'Frank' });
+frankProfile.data.setValue({ age: 37, name: 'Frank' });
 frankProfile.data.clear();
 frankProfile.data.lock();
 frankProfile.data.value;
@@ -80,14 +79,3 @@ const markProfile = new ProfileClass(
   { age: 27, name: 'Mark' },
   [ProfileData, 'private', true]
 );
-
-
-
-
-
-// Example with the customized Data value.
-
-
-
-
-
