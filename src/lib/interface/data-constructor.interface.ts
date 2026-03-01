@@ -5,13 +5,13 @@ import { DataShape } from './data-shape.interface';
  * @description The constructor interface for data types.
  * @export
  * @interface DataConstructor
- * @template Value 
- * @template {DataShape<Value>} Instance The instance.
- * @template {readonly any[]} [Args=any[]] 
- * @extends {BaseDataConstructor<Value, DataShape<Value>, Instance, [...Args]>}
+ * @template T 
+ * @template {DataShape<T>} I The instance.
+ * @template {readonly any[]} [G=any[]] 
+ * @extends {BaseDataConstructor<T, DataShape<T>, I, [...G]>}
  */
 export interface DataConstructor<
-  Value,
-  Instance extends DataShape<Value>,
-  Args extends readonly any[] = any[]
-> extends BaseDataConstructor<Value, DataShape<Value>, Instance, [...Args]> {}
+  T,
+  I extends DataShape<T>,
+  G extends readonly any[] = any[]
+> extends BaseDataConstructor<T, DataShape<T>, I, [...G]> {}
