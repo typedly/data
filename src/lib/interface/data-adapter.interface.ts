@@ -5,10 +5,10 @@ import { DataShape } from './data-shape.interface';
  * @export
  * @interface DataAdapter
  * @template T The type of the data value.
- * @template {boolean} [R=false] The type of the return values for methods.
- * @extends {DataShape<T, R>}
+ * @template {boolean} [A=false] The type of the return values for methods.
+ * @extends {DataShape<T, A>}
  */
-export interface DataAdapter<T, R extends boolean = false>
-  extends DataShape<T, R> {
+export interface DataAdapter<T, A extends boolean = false>
+  extends DataShape<T, A> {
     version?: string;
 }
