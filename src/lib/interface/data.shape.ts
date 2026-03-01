@@ -6,7 +6,7 @@ import { AsyncReturn, IterValue } from "../type";
  * @interface DataShape
  * @template T The value type.
  * @template C The configuration type.
- * @template {boolean} [A=false] The `Promise` return type for methods.
+ * @template {boolean} [A=C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false] The `Promise` return type for methods.
  */
 export interface DataShape<
   T,
