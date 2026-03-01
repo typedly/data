@@ -5,14 +5,25 @@ import { AsyncReturn, IterValue } from "../type";
  * @export
  * @interface DataShape
  * @template T The value type.
+ * @template C The configuration type.
  * @template {boolean} [A=false] The `Promise` return type for methods.
  */
-export interface DataShape<T, A extends boolean = false> {
+export interface DataShape<
+  T,
+  C,
+  A extends boolean = C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false
+> {
   /**
    * @description Indicates whether the methods return a `Promise`.
    * @type {A}
    */
   async: A;
+
+  /**
+   * @description The configuration of the `Data` instance.
+   * @type {?C}
+   */
+  configuration?: C;
 
   /**
    * @description The value of the `Data` instance.
