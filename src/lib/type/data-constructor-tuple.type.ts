@@ -1,14 +1,20 @@
 // Interface.
-import { DataShape, DataConstructor } from "../interface";
+import { DataShape, DataConstructor, DataAdapter } from "../";
 /**
  * @description The type to provide data constructor with arguments.
  * @export
- * @template Value The value type.
- * @template {DataShape<Value>} Instance The shape of the instance.
- * @template {any[]} [Args=any[]] Additional Arguments passed to the instance.
+ * @template {DataShape<T, C, R>} I 
+ * @template {DataAdapter<T, C, R>} A 
+ * @template {{ async?: boolean }} C 
+ * @template T 
+ * @template {boolean} [R=C['async'] extends boolean ? C['async'] : false] 
+ * @template {readonly any[]} [G=any[]] 
  */
 export type DataConstructorTuple<
-  Value,
-  Instance extends DataShape<Value>,
-  Args extends any[] = any[]
-> = [DataConstructor<Value, Instance, Args>, ...Args];
+  I extends DataShape<T, C, R>,
+  A extends DataAdapter<T, C, R>,
+  C extends { async?: boolean },
+  T,
+  R extends boolean = C['async'] extends boolean ? C['async'] : false,
+  G extends readonly any[] = any[]
+> = [DataConstructor<I, A, C, T, R, G>, ...G];

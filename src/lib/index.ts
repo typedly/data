@@ -1,8 +1,11 @@
 export type {
-  DataAdapter,
+  DataAdapterConstructor,
   DataConstructor,
-  DataShape,
   ValueConstructor,
+} from './constructor';
+export type {
+  DataAdapter,
+  DataShape,
   ValueShape
 } from './interface';
 export type {
