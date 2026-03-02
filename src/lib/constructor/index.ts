@@ -1,4 +1,5 @@
 export type { 
+  AdaptableDataConstructor,
   DataAdapterConstructor,
   DataConstructor,
   ValueConstructor
