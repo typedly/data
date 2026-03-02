@@ -1,23 +1,23 @@
 // Type.
 import { AsyncReturn, IterValue } from "../type";
 /**
- * @description The shape of a `Data` type.
+ * @description The shape of a data type.
  * @export
  * @interface DataShape
  * @template T The value type.
  * @template C The configuration type.
- * @template {boolean} [A=C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false] The `Promise` return type for methods.
+ * @template {boolean} [R=C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false] The `Promise` return type for methods.
  */
 export interface DataShape<
   T,
   C,
-  A extends boolean = C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false
+  R extends boolean = C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false
 > {
   /**
    * @description Indicates whether the methods return a `Promise`.
-   * @type {A}
+   * @type {R}
    */
-  async: A;
+  async: R;
 
   /**
    * @description The configuration of the `Data` instance.
@@ -33,21 +33,21 @@ export interface DataShape<
 
   /**
    * @description Clears the value of the `Data` instance.
-   * @returns {AsyncReturn<A, this>} 
+   * @returns {AsyncReturn<R, this>} 
    */
-  clear(): AsyncReturn<A, this>;
+  clear(): AsyncReturn<R, this>;
 
   /**
    * @description Destroys the `Data` instance, making it unusable.
-   * @returns {AsyncReturn<A, this>} 
+   * @returns {AsyncReturn<R, this>} 
    */
-  destroy(): AsyncReturn<A, this>;
+  destroy(): AsyncReturn<R, this>;
 
   /**
    * @description Gets the value of the `Data` instance.
-   * @returns {AsyncReturn<A, T>} 
+   * @returns {AsyncReturn<R, T>} 
    */
-  getValue(): AsyncReturn<A, T>;
+  getValue(): AsyncReturn<R, T>;
 
   /**
    * @description Locks the `Data` instance, preventing any further modifications to its value.
@@ -58,9 +58,9 @@ export interface DataShape<
   /**
    * @description Sets the value of the `Data` instance.
    * @param {T} value 
-   * @returns {AsyncReturn<A, this>} 
+   * @returns {AsyncReturn<R, this>} 
    */
-  setValue(value: T): AsyncReturn<A, this>;
+  setValue(value: T): AsyncReturn<R, this>;
 
   /**
    * @description The string tag of the `Data` instance.
