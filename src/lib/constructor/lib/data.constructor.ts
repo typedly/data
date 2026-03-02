@@ -1,30 +1,25 @@
 // Interface.
-import { DataAdapter, DataShape } from '../../interface';
-import { DataAdapterConstructor } from './data-adapter.constructor';
+import { DataShape } from '../../interface';
 /**
  * @description The constructor interface for data types.
  * @export
  * @interface DataConstructor
  * @template {DataShape<T, C, R>} I The data instance type.
- * @template {DataAdapter<T, C, R>} A The data adapter instance type.
- * @template {{ async?: boolean }} C The configuration type.
- * @template T The underlying value type.
- * @template {boolean} [R=C['async'] extends boolean ? C['async'] : false] The async flag.
+ * @template {{ async?: boolean }} C The configuration type, inferred from `I` if possible.
+ * @template T The underlying value type, inferred from `I` if possible.
+ * @template {boolean} [R=C['async'] extends boolean ? C['async'] : false] The async flag, inferred from `I` if possible.
  * @template {readonly any[]} [G=any[]] Additional arguments.
-
  */
 export interface DataConstructor<
   I extends DataShape<T, C, R>,
-  A extends DataAdapter<T, C, R>,
-  C extends { async?: boolean },
-  T,
-  R extends boolean = C['async'] extends boolean ? C['async'] : false,
+  C extends { async?: boolean } = I extends DataShape<any, infer V, any> ? V : any,
+  T = I extends DataShape<infer U, any, any> ? U : any,
+  R extends boolean = I extends DataShape<T, C, infer U> ? U extends boolean ? U : false : false,
   G extends readonly any[] = any[]
 > {
   new (
     settings: C,
     value: T,
-    adapter?: DataAdapterConstructor<A, C, T, R, G>,
     ...args: G
   ): I;
 }
