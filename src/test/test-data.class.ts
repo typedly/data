@@ -1,14 +1,15 @@
 import { DataShape } from "../lib";
 
 // Create a simple data class with value as property.
-export class TestData<Type> implements DataShape<Type> {
-  get value(): Type { return 27 as Type; }
+export class TestData<T, C extends { async?: boolean } = { async: false }> implements DataShape<T, C, false> {
+  get async(): false { return false; }
+  get value(): T { return 27 as unknown as T; }
   clear(): this { return this; }
   destroy(): this { return this; }
-  getValue(): Type { return 27 as Type; }
+  getValue(): T { return 27 as unknown as T; }
   lock(): this { return this; };
-  setValue(value: Type): this { return this; }
-  constructor(value: Type, ...args: any[]) {
+  setValue(value: T): this { return this; }
+  constructor(value: T, ...args: any[]) {
     console.log(`Instantiated DataConstructor`, value, ...args);
   }
 }

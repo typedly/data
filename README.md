@@ -25,13 +25,19 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 
 - [Installation](#installation)
 - [Api](#api)
-  - [Interface](#interface)
-    - [`DataAdapter`](#dataadapter)
+  - [Constructor](#constructor)
+    - [`AdaptableDataConstructor`](#adaptabledataconstructor)
+    - [`DataAdapterConstructor`](#dataadapterconstructor)
     - [`DataConstructor`](#dataconstructor)
-    - [`DataShape`](#datashape)
     - [`ValueConstructor`](#valueconstructor)
+  - [Interface](#interface)
+    - [`AdaptableDataShape`](#adaptabledatashape)
+    - [`DataAdapterShape`](#dataadaptershape)
+    - [`DataShape`](#datashape)
     - [`ValueShape`](#valueshape)
   - [Type](#type)
+    - [`AdaptableDataConstructorInput`](#adaptabledataconstructorinput)
+    - [`AdaptableDataConstructorTuple`](#adaptabledataconstructortuple)
     - [`AsyncReturn`](#asyncreturn)
     - [`DataConstructorInput`](#dataconstructorinput)
     - [`DataConstructorTuple`](#dataconstructortuple)
@@ -64,144 +70,71 @@ npm install @typedly/data --save-peer
 
 ```typescript
 import {
-  // Interface.
-  DataAdapter,
+  // Data adapter constructor.
+  DataAdapterConstructor,
+
+  // Data Constructor.
+  AdaptableDataConstructor,
   DataConstructor,
-  DataShape,
+
+  // Value Constructor.
   ValueConstructor,
+
+  // Data adapter Interface.
+  DataAdapterShape,
+
+  // Data Interface.
+  AdaptableDataShape,
+  DataShape,
+
+  // Value Interface.
   ValueShape,
-  // Type.
-  AsyncReturn,
+
+  // Adaptable data constructor input and tuple.
+  AdaptableDataConstructorInput,
+  AdaptableDataConstructorTuple,
+
+  // Data constructor input and tuple.
   DataConstructorInput,
   DataConstructorTuple,
+
+  // Type.
+  AsyncReturn,
   IterValue
 } from '@typedly/data';
 ```
 
-### Interface
+### Constructor
 
-#### `DataAdapter`
+#### `AdaptableDataConstructor`
 
-The adapter interface for data types.
+The constructor interface for data types with adapter.
 
 ```typescript
-import { DataAdapter } from '@typedly/data';
+import { AdaptableDataConstructor } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-adapter.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/adaptable-data.constructor.ts)
+
+#### `DataAdapterConstructor`
+
+The constructor interface for data adapters.
+
+```typescript
+import { DataAdapterConstructor } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/data-adapter.constructor.ts)
 
 #### `DataConstructor`
 
 The constructor interface for data types.
 
 ```typescript
-import { DataConstructor, DataShape } from '@typedly/data';
-
-// Import DataShape and DataConstructor.
-// Create a data class that implements `DataShape` of `Type`.
-export class ProfileData<
-  Value extends { age: number, name: string }
-> implements DataShape<Value> {
-
-  public get value(): Value {
-    return {
-      age: this.#age,
-      name: this.#name
-    } as Value;
-  }
-
-  #age;
-  #name;
-  constructor(value: Value, ...args: any[]) {
-    console.log(`Instantiated DataConstructor`, value, ...args);
-    this.#age = value.age;
-    this.#name = value.name;
-  }
-
-  public clear(): this { return this; }
-  public destroy(): this { return this; }
-  public lock(): this { return this; };
-  public getValue(): Value { return this.value; }
-  public setValue(value: Value): this { this.validate(value); return this; }
-  public validate(value: Value): boolean { return true; }
-}
-
-// Create `ProfileClass` with customizable data.
-export class ProfileClass<
-  Value extends { age: number, name: string },
-  DataType extends DataShape<Value>,
-  Args extends any[]
-> {
-
-  public get age(): Value['age'] {
-    return this.#data.value.age;
-  }
-
-  public get name(): Value['name'] {
-    return this.#data.value.name;
-  }
-
-  public get data() {
-    return this.#data;
-  }
-
-  #data: DataType;
-
-  constructor(value: Value, dataCtor: DataConstructor<Value, DataType>);
-  constructor(value: Value, dataCtor: [DataConstructor<Value, DataType>, ...Args]);
-  constructor(value: Value, dataCtor: any) {
-    // ...implementation
-    console.log(`DataConstructor`, value, dataCtor[1]);
-    this.#data = Array.isArray(dataCtor)
-      ? new dataCtor[0](value, ...dataCtor.slice(1))
-      : new dataCtor(value);
-  }
-}
-
-// Initialize.
-// const frankProfile: ProfileClass<object, ProfileData<object>, any[]>
-const frankProfile = new ProfileClass({ age: 37, name: 'Frank' }, ProfileData);
-
-frankProfile.age; // 37
-frankProfile.name; // Frank
-
-// Set the data.
-frankProfile.data.setValue({ age: 37, name: 'Frank' });
-frankProfile.data.clear();
-frankProfile.data.lock();
-frankProfile.data.value;
-
-// Initialize with arguments.
-const markProfile = new ProfileClass(
-  { age: 27, name: 'Mark' },
-  [ProfileData, 'private', true]
-);
+import { DataConstructor } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-constructor.interface.ts)
-
-#### `DataShape`
-
-The shape of a `Data` type.
-
-```typescript
-import { DataShape } from '@typedly/data';
-
-// Create a simple data class with value as property.
-export class TestData<Type> implements DataShape<Type> {
-  get value(): Type { return 27 as Type; }
-  clear(): this { return this; }
-  destroy(): this { return this; }
-  getValue(): Type { return 27 as Type; }
-  lock(): this { return this; };
-  setValue(value: Type): this { return this; }
-  constructor(value: Type, ...args: any[]) {
-    console.log(`Instantiated DataConstructor`, value, ...args);
-  }
-}
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-shape.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/data.constructor.ts)
 
 #### `ValueConstructor`
 
@@ -209,7 +142,39 @@ export class TestData<Type> implements DataShape<Type> {
 import { ValueConstructor } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-constructor.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/value.constructor.ts)
+
+### Interface
+
+#### `AdaptableDataShape`
+
+The shape of a data type with optional adapter.
+
+```typescript
+import { AdaptableDataShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/adaptable-data.shape.ts)
+
+#### `DataAdapterShape`
+
+The adapter interface for data types.
+
+```typescript
+import { DataAdapterShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-adapter.shape.ts)
+
+#### `DataShape`
+
+The shape of a `Data` type.
+
+```typescript
+import { DataShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data.shape.ts)
 
 #### `ValueShape`
 
@@ -222,6 +187,22 @@ import { ValueShape } from '@typedly/data';
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-shape.interface.ts)
 
 ### Type
+
+#### `AdaptableDataConstructorInput`
+
+```typescript
+import { AdaptableDataConstructorInput } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/adaptable-data-constructor-input.type.ts)
+
+#### `AdaptableDataConstructorTuple`
+
+```typescript
+import { AdaptableDataConstructorTuple } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/adaptable-data-constructor-tuple.type.ts)
 
 #### `AsyncReturn`
 
@@ -263,127 +244,6 @@ import { IterValue } from '@typedly/data';
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.type.ts)
 
-### Full example usage
-
-```typescript
-import { DataConstructor, DataShape, ValueConstructor, ValueShape } from '@typedly/data';
-
-// Import ValueShape and ValueConstructor.
-// Create a profile data value.
-export class ProfileDataValue<
-  Type extends { age: number, name: string },
-  Args extends any[] = any[]
-> implements ValueShape<Type> {
-  get value(): Type {
-    return {
-      age: this.#age,
-      name: this.#name
-    } as Type;
-  }
-
-  #age: Type['age'];
-  #name: Type['name'];
-
-  constructor(value: Type, ...args: Args) {
-    console.log(`Instantiated ValueConstructor`, value, ...args);
-    this.#age = value.age;
-    this.#name = value.name;
-  }
-
-  set(value: Type): this { return this; }
-}
-
-export class ProfileDataOfValue<
-  Value extends { age: number, name: string },
-  Args extends any[] = any[],
-  ValueInstance extends ValueShape<Value> = ProfileDataValue<Value, Args>,
-> implements DataShape<Value> {
-
-  get value(): Value {
-    return {
-    } as Value;
-  }
-
-  get valueInstance(): ValueInstance {
-    return this.#value;
-  }
-
-  #value;
-  constructor(
-    value: Value,
-    valueCtor: ValueConstructor<Value, ValueInstance, Args> = ProfileDataValue<Value, Args> as any,
-    ...args: Args
-  ) {
-    console.log(`Instantiated DataConstructor`, value, ...args);
-    this.#value = new valueCtor(value, ...args);
-  }
-
-  setValue(value: Value): this { this.validate(value); return this; }
-  getValue(): Value {
-    return this.#value.value;
-  }
-  clear(): this { return this; }
-  destroy(): this { return this; }
-  lock(): this { return this; };
-  validate(value: Value): boolean {
-    return true;
-  }
-}
-
-// const profileDataOfValue: ProfileDataOfValue<{
-//     age: number;
-//     name: string;
-// }, ProfileDataValue<{
-//     age: number;
-//     name: string;
-// }, []>, []>
-const profileDataOfValue = new ProfileDataOfValue({
-  age: 37,
-  name: 'Mark'
-}, ProfileDataValue);
-
-const dataSymbol = Symbol('data');
-
-// Create `ProfileClass` with customizable data.
-export class ProfileClass<
-  Value extends { age: number, name: string },
-  DataType extends DataShape<Value>,
-  Args extends any[]
-> {
-
-  public get age(): Value['age'] {
-    return this.#data.value.age;
-  }
-
-  public get name(): Value['name'] {
-    return this.#data.value.name;
-  }
-
-  public get [dataSymbol]() {
-    return this.#data;
-  }
-
-  #data: DataType;
-
-  constructor(value: Value, dataCtor: DataConstructor<Value, DataType, Args>);
-  constructor(value: Value, dataCtor: [DataConstructor<Value, DataType, Args>, ...Args]);
-  constructor(value: Value, dataCtor: any) {
-    // ...implementation
-    console.log(`DataConstructor`, value, dataCtor[1]);
-    this.#data = Array.isArray(dataCtor)
-      ? new dataCtor[0](value, ...dataCtor.slice(1))
-      : new dataCtor(value);
-  }
-}
-
-const markProfile = new ProfileClass({ age: 37, name: 'Mark' }, ProfileDataOfValue);
-
-markProfile.age // 37
-markProfile.name // Mark
-markProfile[dataSymbol].value // { age, name }
-markProfile[dataSymbol].valueInstance.set({ age: 27, name: 'Frank' });
-```
-
 ## Contributing
 
 Your contributions are valued! If you'd like to contribute, please feel free to submit a pull request. Help is always appreciated.
@@ -394,20 +254,23 @@ If you find this package useful and would like to support its and general develo
 
 Support via:
 
+- [4Fund](https://4fund.com/bruubs)
+- [DonorBox](https://donorbox.org/become-a-sponsor-to-the-angular-package?default_interval=o)
+- [GitHub](https://github.com/sponsors/angular-package/sponsorships?sponsor=sciborrudnicki&tier_id=83618)
+- [Ko-fi](https://ko-fi.com/sterblack)
+- [OpenCollective](https://opencollective.com/sterblack)
+- [Patreon](https://www.patreon.com/checkout/angularpackage?rid=0&fan_landing=true&view_as=public)
+- [PayPal](https://paypal.me/sterblack)
 - [Stripe](https://donate.stripe.com/dR614hfDZcJE3wAcMM)
 - ~~[Revolut](https://checkout.revolut.com/pay/048b10a3-0e10-42c8-a917-e3e9cb4c8e29)~~
-- [GitHub](https://github.com/sponsors/angular-package/sponsorships?sponsor=sciborrudnicki&tier_id=83618)
-- [DonorBox](https://donorbox.org/become-a-sponsor-to-the-angular-package?default_interval=o)
-- [Patreon](https://www.patreon.com/checkout/angularpackage?rid=0&fan_landing=true&view_as=public)
-- [4Fund](https://4fund.com/bruubs)
 
 or via Trust Wallet
 
-- [XLM](https://link.trustwallet.com/send?coin=148&address=GAFFFB7H3LG42O6JA63FJDRK4PP4JCNEOPHLGLLFH625X2KFYQ4UYVM4)
-- [USDT (BEP20)](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94&token_id=0x55d398326f99059fF775485246999027B3197955)
-- [ETH](https://link.trustwallet.com/send?coin=60&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
-- [BTC](https://link.trustwallet.com/send?coin=0&address=bc1qnf709336tfl57ta5mfkf4t9fndhx7agxvv9svn)
 - [BNB](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
+- [BTC](https://link.trustwallet.com/send?coin=0&address=bc1qnf709336tfl57ta5mfkf4t9fndhx7agxvv9svn)
+- [ETH](https://link.trustwallet.com/send?coin=60&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94)
+- [USDT (BEP20)](https://link.trustwallet.com/send?coin=20000714&address=0xA0c22A2bc7E37C1d5992dFDFFeD5E6f9298E1b94&token_id=0x55d398326f99059fF775485246999027B3197955)
+- [XLM](https://link.trustwallet.com/send?coin=148&address=GAFFFB7H3LG42O6JA63FJDRK4PP4JCNEOPHLGLLFH625X2KFYQ4UYVM4)
 
 Thanks for your support!
 
@@ -449,6 +312,10 @@ How do I know when to release 1.0.0?
 MIT © typedly ([license][typedly-license])
 
 ## Related packages
+
+- **[@typescript-package/collection](https://github.com/typescript-package/collection)**: A lightweight TypeScript library for data collection.
+
+## Packages
 
 - **[@typescript-package/chain-descriptor](https://github.com/typescript-package/chain-descriptor)**: A **TypeScript** library for chain property descriptor.
 - **[@typescript-package/controlled-descriptor](https://github.com/typescript-package/controlled-descriptor)**: A **TypeScript** library for controlled property descriptor.

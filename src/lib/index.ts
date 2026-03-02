@@ -1,13 +1,20 @@
 export type {
-  DataAdapter,
+  AdaptableDataConstructor,
+  DataAdapterConstructor,
   DataConstructor,
-  DataShape,
   ValueConstructor,
+} from './constructor';
+export type {
+  DataAdapterShape,
+  AdaptableDataShape,
+  DataShape,
   ValueShape
 } from './interface';
 export type {
-  AsyncReturn,
+  AdaptableDataConstructorInput,
+  AdaptableDataConstructorTuple,
   DataConstructorInput,
   DataConstructorTuple,
+  AsyncReturn,
   IterValue
 } from './type';
