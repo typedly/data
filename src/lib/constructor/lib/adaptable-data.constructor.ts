@@ -2,7 +2,7 @@
 import { AdaptableDataShape, DataAdapterShape } from '../../interface';
 import { DataAdapterConstructor } from './data-adapter.constructor';
 /**
- * @description The constructor interface for data types.
+ * @description The constructor interface for data types with adapter.
  * @export
  * @interface AdaptableDataConstructor
  * @template {DataAdapterShape<T, C, R>} A The data adapter instance type.
