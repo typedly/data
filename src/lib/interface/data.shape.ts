@@ -15,18 +15,21 @@ export interface DataShape<
 > {
   /**
    * @description Indicates whether the methods return a `Promise`.
+   * @readonly
    * @type {R}
    */
   readonly async: R;
 
   /**
    * @description The configuration of the `Data` instance.
+   * @readonly
    * @type {?C}
    */
   readonly configuration?: C;
 
   /**
    * @description The value of the `Data` instance.
+   * @readonly
    * @type {T}
    */
   readonly value: T;
@@ -64,9 +67,10 @@ export interface DataShape<
 
   /**
    * @description The string tag of the `Data` instance.
+   * @readonly
    * @type {?string}
    */
-  [Symbol.toStringTag]?: string;
+  readonly [Symbol.toStringTag]?: string;
 
   /**
    * @description The iterator method for the `Data` instance, allowing it to be iterable.
