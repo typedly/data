@@ -17,19 +17,19 @@ export interface DataShape<
    * @description Indicates whether the methods return a `Promise`.
    * @type {R}
    */
-  async: R;
+  readonly async: R;
 
   /**
    * @description The configuration of the `Data` instance.
    * @type {?C}
    */
-  configuration?: C;
+  readonly configuration?: C;
 
   /**
    * @description The value of the `Data` instance.
    * @type {T}
    */
-  value: T;
+  readonly value: T;
 
   /**
    * @description Clears the value of the `Data` instance.
