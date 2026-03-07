@@ -1,0 +1,1 @@
+export type { ConfigurableDataShape } from './configurable.data.shape';
