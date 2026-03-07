@@ -5,13 +5,11 @@ import { AsyncReturn, IterValue } from "../type";
  * @export
  * @interface DataShape
  * @template T The value type.
- * @template C The configuration type.
- * @template {boolean} [R=C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false] The `Promise` return type for methods.
+ * @template {boolean} [R=false] The async flag.
  */
 export interface DataShape<
   T,
-  C,
-  R extends boolean = C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false
+  R extends boolean = false
 > {
   /**
    * @description Indicates whether the methods return a `Promise`.
@@ -19,13 +17,6 @@ export interface DataShape<
    * @type {R}
    */
   readonly async: R;
-
-  /**
-   * @description The configuration of the `Data` instance.
-   * @readonly
-   * @type {?C}
-   */
-  readonly configuration?: C;
 
   /**
    * @description The value of the `Data` instance.
@@ -54,9 +45,9 @@ export interface DataShape<
 
   /**
    * @description Locks the `Data` instance, preventing any further modifications to its value.
-   * @returns {this} 
+   * @returns {AsyncReturn<R, this>} The `Data` instance at the time of locking.
    */
-  lock(): this;
+  lock(): AsyncReturn<R, this>;
 
   /**
    * @description Sets the value of the `Data` instance.
