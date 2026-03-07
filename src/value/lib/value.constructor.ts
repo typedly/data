@@ -1,6 +1,6 @@
 // Interface.
 import { DataConstructor as BaseDataConstructor } from '@typedly/constructor';
-import { ValueShape } from "../../interface";
+import { ValueShape } from "./value.shape";
 /**
  * @description The constructor for value in data for advanced customization.
  * @export
