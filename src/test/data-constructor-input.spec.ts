@@ -1,5 +1,5 @@
 import { DataAdapterShape, DataAdapterConstructor, DataConstructorInput, AdaptableDataShape } from "../lib";
-import { AdaptableDataConstructorInput } from "../lib/type/adaptable-data-constructor-input.type";
+import { AdaptableDataConstructorInput } from "../adaptable/lib/temp/adaptable-data-constructor-input.type";
 
 export class ProfileData<
   A extends DataAdapterShape<T, C, any>,

@@ -1,20 +1,23 @@
 export type {
-  AdaptableDataConstructor,
-  DataAdapterConstructor,
   DataConstructor,
-  ValueConstructor,
-} from './constructor';
-export type {
-  DataAdapterShape,
-  AdaptableDataShape,
+  DataSettings,
   DataShape,
-  ValueShape
 } from './interface';
+
 export type {
-  AdaptableDataConstructorInput,
-  AdaptableDataConstructorTuple,
+  // Return types
+  AsyncReturn,
+  // Config
+  DataConfig,
+  // Input types
   DataConstructorInput,
   DataConstructorTuple,
-  AsyncReturn,
-  IterValue
+  // Infer
+  InferAsync,
+  InferAsyncOf,
+  InferSettings,
+  InferValue,
+  // Iterable
+  IterValue,
+  IterableElement,
 } from './type';

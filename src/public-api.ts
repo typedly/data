@@ -1,36 +1,40 @@
 /*
  * Public API Surface of data
  */
+
 export type {
-  // Data adapter constructor.
-  DataAdapterConstructor,
-
-  // Data Constructor.
   AdaptableDataConstructor,
-  DataConstructor,
+  AdaptableDataShape
+} from './adaptable';
 
-  // Value Constructor.
-  ValueConstructor,
-
-  // Data adapter Interface.
+export type {
   DataAdapterShape,
+  DataAdapterConstructor,
+} from './adapter';
 
-  // Data Interface.
-  AdaptableDataShape,
+export type {
+  ConfigurableDataShape
+} from './configurable';
+
+export type {
+  DataConstructor,
+  DataSettings,
   DataShape,
+} from './lib/interface';
 
-  // Value Interface.
-  ValueShape,
-
-  // Adaptable data constructor input and tuple.
-  AdaptableDataConstructorInput,
-  AdaptableDataConstructorTuple,
-
-  // Data constructor input and tuple.
+export type {
+  AsyncReturn,
+  DataConfig,
   DataConstructorInput,
   DataConstructorTuple,
+  InferAsync,
+  InferAsyncOf,
+  InferValue,
+  IterValue,
+  IterableElement,
+} from './lib/type';
 
-  // Type.
-  AsyncReturn,
-  IterValue
-} from './lib';
+export type {
+  ValueConstructor,
+  ValueShape,
+} from './value';
