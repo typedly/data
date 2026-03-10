@@ -5,5 +5,10 @@
  * @template {boolean} [R=false] The async flag.
  */
 export interface DataSettings<R extends boolean = false> {
+  /**
+   * @description Optional async flag to indicate whether the data type is asynchronous.
+   * @default false
+   * @type {?R}
+   */
   async?: R;
 }
