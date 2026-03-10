@@ -8,8 +8,8 @@ export type {
 } from './adaptable';
 
 export type {
-  DataAdapterShape,
   DataAdapterConstructor,
+  DataAdapterShape,
 } from './adapter';
 
 export type {
@@ -24,15 +24,29 @@ export type {
 
 export type {
   AsyncReturn,
+
+  // Configuration.
   DataConfig,
   DataConstructorInput,
   DataConstructorTuple,
+
+  // Infer types.
   InferAsync,
   InferAsyncOf,
   InferValue,
+
+  // Iterables.
   IterValue,
   IterableElement,
 } from './lib/type';
+
+export type {
+  // Interfaces.
+  Adaptable,
+  Configurable,
+  Serializable,
+  Transformable,
+} from './traits';
 
 export type {
   ValueConstructor,
