@@ -1,8 +1,8 @@
 // Interface.
-import { ConfigurableDataShape } from '../../configurable';
-import { DataSettings } from '../../lib/interface';
+import type { ConfigurableDataShape } from '../../configurable';
+import type { DataSettings } from '../../lib/interface';
 // Type.
-import { InferAsync } from '../../lib/type';
+import type { InferAsync } from '../../lib/type';
 /**
  * @description The adapter interface for data types.
  * @export
