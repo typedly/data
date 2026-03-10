@@ -1,9 +1,10 @@
+// Interface.
 import { DataAdapterShape } from "../../adapter";
 import { ConfigurableDataShape } from "../../configurable";
 /**
  * @description Infers the settings type from a data adapter or configurable shape.
  * @export
- * @template I 
+ * @template I The data shape type, which can be a `DataAdapterShape` or `ConfigurableDataShape`.
  * @template [F=any] 
  */
 export type InferSettings<I, F = any> =
@@ -11,4 +12,4 @@ export type InferSettings<I, F = any> =
     ? C
     : I extends ConfigurableDataShape<infer C, any, any>
       ? C
-      : F; 
+      : F;
