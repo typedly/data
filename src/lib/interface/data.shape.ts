@@ -1,5 +1,6 @@
 // Type.
-import { AsyncReturn, IterValue } from "../type";
+import { AsyncReturn } from "../type";
+import { IterValue } from "../../iterable";
 /**
  * @description The shape of a data type.
  * @export

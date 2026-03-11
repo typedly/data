@@ -1,7 +1,7 @@
 // Interface
 import { DataSettings } from "../interface/data.settings";
 // Type
-import { InferAsync } from ".";
+import { InferAsync } from "../../inference";
 /**
  * @description The type for the data configuration, which can be either a full configuration object of `C` or just an async flag.
  * @export

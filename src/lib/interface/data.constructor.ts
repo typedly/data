@@ -1,7 +1,7 @@
 // Interface.
 import type { DataShape } from './data.shape';
 // Type.
-import type { InferAsync, InferValue } from '../type';
+import type { InferAsync, InferValue } from '../../inference';
 /**
  * @description The constructor interface for data types.
  * @export
