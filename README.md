@@ -18,7 +18,9 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 
 ## Features
 
-- **Adapter**: Optional data adapter to customize managing underlying data.
+- **Adapter**: Optional data adapter to customize managing underlying data available under the [`@typedly/adaptable-data`](https://github.com/typedly/data-adapter).
+- **Configurable**: Configurable data shape available under the `@typedly/configurable-data`.
+- **Traits**: Extended customization by traits, such as `Configurable`, `Adaptable`, `Serializable`, and `Transformable` under the [`@typedly/data-traits`](https://github.com/typedly/data-traits) package.
 - **Shape**: The default shape for data of any `T` type with conditional async.
 
 ## Table of contents
@@ -56,12 +58,12 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 ## Related packages
 
 - **[@typedly/adaptable-data](https://github.com/typedly/adaptable-data)**: A **TypeScript** type definitions for data adapter.
+- **[@typedly/collection](https://github.com/typedly/collection)**: A **TypeScript** type definitions package for data collections with customizable storage.
+- **[@typedly/configurable-data](https://github.com/typedly/configurable-data)**: A **TypeScript** type definitions for configurable data.
 - **[@typedly/data-adapter](https://github.com/typedly/data-adapter)**: A **TypeScript** type definitions for data adapter.
 - **[@typedly/data-traits](https://github.com/typedly/data-traits)**: A **TypeScript** type definitions for data traits.
-- **[@typedly/configurable-data](https://github.com/typedly/configurable-data)**: A **TypeScript** type definitions for configurable data.
-- **[@typedly/collection](https://github.com/typedly/collection)**: A **TypeScript** type definitions package for data collections with customizable storage.
-- **[@typescript-package/data](https://github.com/typescript-package/collection)**: A lightweight TypeScript library for basic data management.
-- **[@typescript-package/collection](https://github.com/typescript-package/collection)**: A lightweight TypeScript library for data collection.
+- **[@typescript-package/data](https://github.com/typescript-package/data)**: A lightweight **TypeScript** library for basic data management.
+- **[@typescript-package/collection](https://github.com/typescript-package/collection)**: A lightweight **TypeScript** library for data collection.
 
 ## Installation
 
@@ -81,7 +83,30 @@ npm install @typedly/data --save-peer
 
 ```typescript
 import {
+  // Inference.
+  InferAsync,
+  InferAsyncOf,
+  InferValue,
 
+  // Iterable.
+  IterValue,
+  IterableElement,
+
+  // Return types
+  AsyncReturn,
+  // Config
+  DataConfig,
+  // Input types
+  DataConstructorInput,
+  DataConstructorTuple,
+
+  // Iterable
+  IterValue,
+  IterableElement,
+
+  // Value.
+  ValueConstructor,
+  ValueShape,
 } from '@typedly/data';
 ```
 
