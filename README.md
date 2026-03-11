@@ -19,7 +19,7 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 ## Features
 
 - **Adapter**: Optional data adapter to customize managing underlying data available under the [`@typedly/adaptable-data`](https://github.com/typedly/data-adapter).
-- **Configurable**: Configurable data shape available under the `@typedly/configurable-data`.
+- **Configurable**: Configurable data shape available under the [`@typedly/configurable-data`](https://github.com/typedly/configurable-data).
 - **Traits**: Extended customization by traits, such as `Configurable`, `Adaptable`, `Serializable`, and `Transformable` under the [`@typedly/data-traits`](https://github.com/typedly/data-traits) package.
 - **Shape**: The default shape for data of any `T` type with conditional async.
 
