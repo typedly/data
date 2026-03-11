@@ -1,11 +1,4 @@
 export type {
-  // Infer
-  InferAsync,
-  InferAsyncOf,
-  InferValue,
-} from '../inference';
-
-export type {
   DataConstructor,
   DataSettings,
   DataShape,
@@ -20,9 +13,3 @@ export type {
   DataConstructorInput,
   DataConstructorTuple,
 } from './type';
-
-export type {
-  // Iterable
-  IterValue,
-  IterableElement,
-} from '../iterable';
