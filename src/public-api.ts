@@ -3,18 +3,15 @@
  */
 
 export type {
-  AdaptableDataConstructor,
-  AdaptableDataShape
-} from './adaptable';
+  InferAsync,
+  InferAsyncOf,
+  InferValue,
+} from './inference';
 
 export type {
-  DataAdapterConstructor,
-  DataAdapterShape,
-} from './adapter';
-
-export type {
-  ConfigurableDataShape
-} from './configurable';
+  IterableElement,
+  IterValue,
+} from './iterable';
 
 export type {
   DataConstructor,
@@ -29,24 +26,7 @@ export type {
   DataConfig,
   DataConstructorInput,
   DataConstructorTuple,
-
-  // Infer types.
-  InferAsync,
-  InferAsyncOf,
-  InferValue,
-
-  // Iterables.
-  IterValue,
-  IterableElement,
 } from './lib/type';
-
-export type {
-  // Interfaces.
-  Adaptable,
-  Configurable,
-  Serializable,
-  Transformable,
-} from './traits';
 
 export type {
   ValueConstructor,
