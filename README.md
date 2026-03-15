@@ -10,9 +10,19 @@
 ## @typedly/data
 
 <!-- npm badge -->
-[![npm version][typedly-npm-badge-svg]][typedly-npm-badge]
-[![GitHub issues][typedly-badge-issues]][typedly-issues]
-[![GitHub license][typedly-badge-license]][typedly-license]
+[![npm version][package-npm-badge-svg]][package-npm-badge]
+[![GitHub issues][package-badge-issues]][package-issues]
+[![GitHub license][package-badge-license]][package-license]
+
+<!-- GitHub badges -->
+[![GitHub issues][package-badge-issues]][package-issues]
+[![GitHub forks][package-badge-forks]][package-forks]
+[![GitHub stars][package-badge-stars]][package-stars]
+[![GitHub license][package-badge-license]][package-license]
+
+<!-- Sponsors -->
+[![GitHub Sponsors][github-badge-sponsor]][github-sponsor-link]
+[![Patreon Sponsors][patreon-badge]][patreon-link]
 
 A **TypeScript** type definitions package for [**@typescript-package/data**](https://github.com/typescript-package/data).
 
@@ -20,7 +30,7 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 
 - **Adapter**: Optional data adapter to customize managing underlying data available under the [`@typedly/adaptable-data`](https://github.com/typedly/data-adapter).
 - **Configurable**: Configurable data shape available under the [`@typedly/configurable-data`](https://github.com/typedly/configurable-data).
-- **Traits**: Extended customization by traits, such as `Configurable`, `Adaptable`, `Serializable`, and `Transformable` under the [`@typedly/data-traits`](https://github.com/typedly/data-traits) package.
+- **Traits**: Extended customization via traits, such as `Configurable`, `Adaptable`, `Serializable`, and `Transformable` under the [`@typedly/data-traits`](https://github.com/typedly/data-traits) package.
 - **Shape**: The default shape for data of any `T` type with conditional async.
 
 ## Table of contents
@@ -28,13 +38,14 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 - [Related packages](#related-packages)
 - [Installation](#installation)
 - [Api](#api)
+  - [Configuration](#configuration)
+    - [`DataConfig`](#dataconfig)
+    - [`DataSettings`](#datasettings)
   - [Data](#data)
     - [`AsyncReturn`](#asyncreturn)
-    - [`DataConfig`](#dataconfig)
     - [`DataConstructorInput`](#dataconstructorinput)
     - [`DataConstructorTuple`](#dataconstructortuple)
     - [`DataConstructor`](#dataconstructor)
-    - [`DataSettings`](#datasettings)
     - [`DataShape`](#datashape)
   - [Inference](#inference)
     - [`InferAsyncOf`](#inferasyncof)
@@ -110,6 +121,28 @@ import {
 } from '@typedly/data';
 ```
 
+### Configuration
+
+#### `DataConfig`
+
+The type for the data configuration, which can be either a full configuration object of `C` or just an async flag.
+
+```typescript
+import { DataConfig } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/data.config.ts)
+
+#### `DataSettings`
+
+The settings for a data type.
+
+```typescript
+import { DataSettings } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.settings.ts)
+
 ### Inference
 
 #### `InferAsyncOf`
@@ -176,16 +209,6 @@ import { AsyncReturn } from '@typedly/data';
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/async-return.type.ts)
 
-#### `DataConfig`
-
-The type for the data configuration, which can be either a full configuration object of `C` or just an async flag.
-
-```typescript
-import { DataConfig } from '@typedly/data';
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/data.config.ts)
-
 #### `DataConstructorInput`
 
 The input type for data constructors, with arguments support.
@@ -215,16 +238,6 @@ import { DataConstructor } from '@typedly/data';
 ```
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.constructor.ts)
-
-#### `DataSettings`
-
-The settings for a data type.
-
-```typescript
-import { DataSettings } from '@typedly/data';
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.settings.ts)
 
 #### `DataShape`
 
@@ -321,7 +334,7 @@ How do I know when to release 1.0.0?
 
 ## License
 
-MIT © typedly ([license][typedly-license])
+MIT © typedly ([license][package-license])
 
 ## Packages
 
@@ -337,23 +350,41 @@ MIT © typedly ([license][typedly-license])
 - **[@typescript-package/wrapped-descriptor](https://github.com/typescript-package/wrapped-descriptor)**: A lightweight **TypeScript** library for wrapped property descriptor.
 - **[@xtypescript/property](https://github.com/xtypescript/property)** - A comprehensive, reactive **TypeScript** library for precise and extensible object property control.
 
+<!-- Funding -->
+[github-badge-sponsor]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/angular-package
+[github-sponsor-link]: https://github.com/sponsors/angular-package
+[patreon-badge]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dangularpackage%26type%3Dpatrons&style=flat
+[patreon-link]: https://www.patreon.com/join/angularpackage/checkout?fan_landing=true&rid=0
+
+<!-- Discord -->
+[discord-badge]: https://img.shields.io/discord/925168966098386944?style=social&logo=discord&label=Discord
+[discord-channel]: https://discord.com/invite/rUCR2CW75G
+
+<!-- Gitter -->
+[gitter-badge]: https://img.shields.io/gitter/room/angular-package/ap-sass?style=social&logo=gitter
+[gitter-chat]: https://app.gitter.im/#/room/#ap-sass:gitter.im
+
+<!-- Twitter -->
+[twitter-badge]: https://img.shields.io/twitter/follow/angularpackage?label=%40angularpackage&style=social
+[twitter-follow]: https://twitter.com/angularpackage
+
 <!-- This package: typedly  -->
   <!-- GitHub: badges -->
-  [typedly-badge-issues]: https://img.shields.io/github/issues/typedly/data
-  [typedly-badge-forks]: https://img.shields.io/github/forks/typedly/data
-  [typedly-badge-stars]: https://img.shields.io/github/stars/typedly/data
-  [typedly-badge-license]: https://img.shields.io/github/license/typedly/data
+  [package-badge-issues]: https://img.shields.io/github/issues/typedly/data
+  [package-badge-forks]: https://img.shields.io/github/forks/typedly/data
+  [package-badge-stars]: https://img.shields.io/github/stars/typedly/data
+  [package-badge-license]: https://img.shields.io/github/license/typedly/data
   <!-- GitHub: badges links -->
-  [typedly-issues]: https://github.com/typedly/data/issues
-  [typedly-forks]: https://github.com/typedly/data/network
-  [typedly-license]: https://github.com/typedly/data/blob/master/LICENSE
-  [typedly-stars]: https://github.com/typedly/data/stargazers
+  [package-issues]: https://github.com/typedly/data/issues
+  [package-forks]: https://github.com/typedly/data/network
+  [package-license]: https://github.com/typedly/data/blob/master/LICENSE
+  [package-stars]: https://github.com/typedly/data/stargazers
 <!-- This package -->
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
-  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
+  [package-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
+  [package-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
 
 <!-- GIT -->
 [git-semver]: http://semver.org/
