@@ -1,5 +1,6 @@
 // Interface.
-import { DataSettings, DataShape } from "../../lib/interface";
+import type { DataSettings} from '../../configuration';
+import type { DataShape } from "../../lib/interface";
 /**
  * @description Infers the async flag from the settings `DataSettings` or shape `DataShape`.
  * @export
