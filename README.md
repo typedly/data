@@ -155,7 +155,7 @@ Infers the async flag from a tuple of arguments, returning true if any of the ar
 import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/inference/infer-async-of.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/lib/infer-async-of.type.ts)
 
 #### `InferAsync`
 
@@ -165,7 +165,7 @@ Infers the async flag from the settings `DataSettings` or shape `DataShape`.
 import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/inference/infer-async.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/lib/infer-async.type.ts)
 
 #### `InferValue`
 
@@ -175,7 +175,7 @@ Infers the value type from a data shape interface.
 import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/inference/infer-value.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/lib/infer-value.type.ts)
 
 ### Iterable
 
@@ -187,7 +187,7 @@ The iterate element type.
 import { IterElement } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/iterable/iter-element.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/iterable/lib/iter-element.type.ts)
 
 #### `IterValue`
 
@@ -197,7 +197,7 @@ The iterated value type.
 import { IterValue } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/iterable/iter-value.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/iterable/lib/iter-value.type.ts)
 
 ### Data
 
