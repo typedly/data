@@ -94,7 +94,11 @@ npm install @typedly/data --save-peer
 
 ```typescript
 import {
-  // Inference.
+  // Configuration
+  DataConfig,
+  DataSettings,
+
+// Inference.
   InferAsync,
   InferAsyncOf,
   InferValue,
@@ -103,17 +107,15 @@ import {
   IterValue,
   IterableElement,
 
+  // Data.
+  DataConstructor,
+  DataShape,
+
   // Return types
   AsyncReturn,
-  // Config
-  DataConfig,
   // Input types
   DataConstructorInput,
   DataConstructorTuple,
-
-  // Iterable
-  IterValue,
-  IterableElement,
 
   // Value.
   ValueConstructor,
