@@ -25,7 +25,9 @@
   },
   "keywords": [
     "@typedly",
-    "@typedly/data"
+    "@typedly/data",
+    "configuration",
+    "settings"
   ],
   "funding": [
     {
