@@ -1,5 +1,5 @@
 // Interface
-import { DataSettings } from "../interface/data.settings";
+import { DataSettings } from "./data.settings";
 // Type
 import { InferAsync } from "../../inference";
 /**

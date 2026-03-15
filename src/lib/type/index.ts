@@ -1,5 +1,3 @@
-// Config.
-export type { DataConfig } from './data.config';
 // Data.
 export type { DataConstructorInput } from './data.constructor.input';
 export type { DataConstructorTuple } from './data.constructor.tuple';

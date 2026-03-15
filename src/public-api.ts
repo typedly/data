@@ -1,6 +1,10 @@
 /*
  * Public API Surface of data
  */
+export type {
+  DataConfig,
+  DataSettings,
+} from './configuration';
 
 export type {
   InferAsync,
@@ -15,15 +19,11 @@ export type {
 
 export type {
   DataConstructor,
-  DataSettings,
   DataShape,
 } from './lib/interface';
 
 export type {
   AsyncReturn,
-
-  // Configuration.
-  DataConfig,
   DataConstructorInput,
   DataConstructorTuple,
 } from './lib/type';
