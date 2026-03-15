@@ -1,4 +1,5 @@
-import { ValueShape, ValueConstructor, DataShape, DataConstructor } from '../lib';
+import { ValueShape, ValueConstructor, DataShape, DataConstructor } from '../../public-api';
+
 
 // Import ValueShape and ValueConstructor.
 // Create a profile data value.
@@ -29,7 +30,7 @@ export class ProfileDataOfValue<
   T extends { age: number, name: string },
   G extends any[] = any[],
   I extends ValueShape<T> = ProfileDataValue<T, G>,
-> implements DataShape<T, { async?: boolean }, false> {
+> implements DataShape<T, false> {
   get async(): false { return false; }
   get value(): T {
     return this.#value.value;
@@ -41,7 +42,6 @@ export class ProfileDataOfValue<
 
   #value: I;
   constructor(
-    settings: { async?: boolean },
     value: T,
     valueCtor: ValueConstructor<T, I, G> = ProfileDataValue<T, G> as any,
     ...args: G
@@ -69,7 +69,7 @@ export class ProfileDataOfValue<
 //     age: number;
 //     name: string;
 // }, []>, []>
-const profileDataOfValue = new ProfileDataOfValue({}, {
+const profileDataOfValue = new ProfileDataOfValue({
   age: 37,
   name: 'Mark'
 }, ProfileDataValue);
@@ -79,7 +79,7 @@ const dataSymbol = Symbol('data');
 // Create `ProfileClass` with customizable data.
 export class ProfileClass<
   T extends { age: number, name: string },
-  I extends DataShape<T, { async?: boolean }, false>,
+  I extends DataShape<T, false>,
   G extends any[]
 > {
 
@@ -97,8 +97,8 @@ export class ProfileClass<
 
   #data: I;
 
-  constructor(value: T, dataCtor: DataConstructor<I, { async?: boolean }, T, false, G>);
-  constructor(value: T, dataCtor: [DataConstructor<I, { async?: boolean }, T, false, G>, ...G]);
+  constructor(value: T, dataCtor: DataConstructor<I,  T, false, G>);
+  constructor(value: T, dataCtor: [DataConstructor<I, T, false, G>, ...G]);
   constructor(value: T, dataCtor: any) {
     // ...implementation
     console.log(`DataConstructor`, value, dataCtor[1]);

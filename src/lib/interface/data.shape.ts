@@ -1,35 +1,26 @@
 // Type.
-import { AsyncReturn, IterValue } from "../type";
+import { AsyncReturn } from "../type";
 /**
  * @description The shape of a data type.
  * @export
  * @interface DataShape
  * @template T The value type.
- * @template C The configuration type.
- * @template {boolean} [R=C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false] The `Promise` return type for methods.
+ * @template {boolean} [R=false] The async flag.
  */
-export interface DataShape<
-  T,
-  C,
-  R extends boolean = C extends { async?: boolean } ? C['async'] extends boolean ? C['async'] : false : false
-> {
+export interface DataShape<T, R extends boolean = false> {
   /**
    * @description Indicates whether the methods return a `Promise`.
+   * @readonly
    * @type {R}
    */
-  async: R;
-
-  /**
-   * @description The configuration of the `Data` instance.
-   * @type {?C}
-   */
-  configuration?: C;
+  readonly async: R;
 
   /**
    * @description The value of the `Data` instance.
+   * @readonly
    * @type {T}
    */
-  value: T;
+  readonly value: T;
 
   /**
    * @description Clears the value of the `Data` instance.
@@ -51,7 +42,7 @@ export interface DataShape<
 
   /**
    * @description Locks the `Data` instance, preventing any further modifications to its value.
-   * @returns {this} 
+   * @returns {this} The `Data` instance at the time of locking.
    */
   lock(): this;
 
@@ -61,22 +52,4 @@ export interface DataShape<
    * @returns {AsyncReturn<R, this>} 
    */
   setValue(value: T): AsyncReturn<R, this>;
-
-  /**
-   * @description The string tag of the `Data` instance.
-   * @type {?string}
-   */
-  [Symbol.toStringTag]?: string;
-
-  /**
-   * @description The iterator method for the `Data` instance, allowing it to be iterable.
-   * @returns {IterableIterator<IterValue<T>>} 
-   */
-  [Symbol.iterator]?(): IterableIterator<IterValue<T>>;
-
-  /**
-   * @description The asynchronous iterator method for the `Data` instance, allowing it to be asynchronously iterable.
-   * @returns {AsyncIterableIterator<IterValue<T>>} 
-   */
-  [Symbol.asyncIterator]?(): AsyncIterableIterator<IterValue<T>>;
 }

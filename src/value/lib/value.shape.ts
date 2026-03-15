@@ -2,11 +2,11 @@
  * @description The value shape.
  * @export
  * @interface ValueShape
- * @template Type The type of value.
+ * @template T The type of value.
  */
-export interface ValueShape<Type> {
+export interface ValueShape<T> {
   // Optional.
   // get timestamp(): number;
-  get value(): Type;
-  set(value: Type): this;
+  get value(): T;
+  set(value: T): this;
 }

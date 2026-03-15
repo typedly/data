@@ -10,39 +10,53 @@
 ## @typedly/data
 
 <!-- npm badge -->
-[![npm version][typedly-npm-badge-svg]][typedly-npm-badge]
-[![GitHub issues][typedly-badge-issues]][typedly-issues]
-[![GitHub license][typedly-badge-license]][typedly-license]
+[![npm version][package-npm-badge-svg]][package-npm-badge]
+[![GitHub issues][package-badge-issues]][package-issues]
+[![GitHub license][package-badge-license]][package-license]
+
+<!-- GitHub badges -->
+[![GitHub issues][package-badge-issues]][package-issues]
+[![GitHub forks][package-badge-forks]][package-forks]
+[![GitHub stars][package-badge-stars]][package-stars]
+[![GitHub license][package-badge-license]][package-license]
+
+<!-- Sponsors -->
+[![GitHub Sponsors][github-badge-sponsor]][github-sponsor-link]
+[![Patreon Sponsors][patreon-badge]][patreon-link]
 
 A **TypeScript** type definitions package for [**@typescript-package/data**](https://github.com/typescript-package/data).
 
 ## Features
 
-- **Adapter**: Optional data adapter to customize managing underlying data.
+- **Adapter**: Optional data adapter to customize managing underlying data available under the [`@typedly/adaptable-data`](https://github.com/typedly/data-adapter).
+- **Configurable**: Configurable data shape available under the [`@typedly/configurable-data`](https://github.com/typedly/configurable-data).
+- **Traits**: Extended customization via traits, such as `Configurable`, `Adaptable`, `Serializable`, and `Transformable` under the [`@typedly/data-traits`](https://github.com/typedly/data-traits) package.
 - **Shape**: The default shape for data of any `T` type with conditional async.
 
 ## Table of contents
 
+- [Related packages](#related-packages)
 - [Installation](#installation)
 - [Api](#api)
-  - [Constructor](#constructor)
-    - [`AdaptableDataConstructor`](#adaptabledataconstructor)
-    - [`DataAdapterConstructor`](#dataadapterconstructor)
-    - [`DataConstructor`](#dataconstructor)
-    - [`ValueConstructor`](#valueconstructor)
-  - [Interface](#interface)
-    - [`AdaptableDataShape`](#adaptabledatashape)
-    - [`DataAdapterShape`](#dataadaptershape)
-    - [`DataShape`](#datashape)
-    - [`ValueShape`](#valueshape)
-  - [Type](#type)
-    - [`AdaptableDataConstructorInput`](#adaptabledataconstructorinput)
-    - [`AdaptableDataConstructorTuple`](#adaptabledataconstructortuple)
+  - [Configuration](#configuration)
+    - [`DataConfig`](#dataconfig)
+    - [`DataSettings`](#datasettings)
+  - [Data](#data)
     - [`AsyncReturn`](#asyncreturn)
     - [`DataConstructorInput`](#dataconstructorinput)
     - [`DataConstructorTuple`](#dataconstructortuple)
+    - [`DataConstructor`](#dataconstructor)
+    - [`DataShape`](#datashape)
+  - [Inference](#inference)
+    - [`InferAsyncOf`](#inferasyncof)
+    - [`InferAsync`](#inferasync)
+    - [`InferValue`](#infervalue)
+  - [Iterable](#iterable)
     - [`IterValue`](#itervalue)
-- [Full example usage](#full-example-usage)
+    - [`IterableElement`](#itervalue)
+  - [Value](#value)
+    - [`ValueConstructor`](#valueconstructor)
+    - [`ValueShape`](#valueshape)
 - [Contributing](#contributing)
 - [Support](#support)
 - [Code of Conduct](#code-of-conduct)
@@ -50,7 +64,17 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
   - [Commit](#commit)
   - [Versioning](#versioning)
 - [License](#license)
-- [Related packages](#related-packages)
+- [Packages](#packages)
+
+## Related packages
+
+- **[@typedly/adaptable-data](https://github.com/typedly/adaptable-data)**: A **TypeScript** type definitions for data adapter.
+- **[@typedly/collection](https://github.com/typedly/collection)**: A **TypeScript** type definitions package for data collections with customizable storage.
+- **[@typedly/configurable-data](https://github.com/typedly/configurable-data)**: A **TypeScript** type definitions for configurable data.
+- **[@typedly/data-adapter](https://github.com/typedly/data-adapter)**: A **TypeScript** type definitions for data adapter.
+- **[@typedly/data-traits](https://github.com/typedly/data-traits)**: A **TypeScript** type definitions for data traits.
+- **[@typescript-package/data](https://github.com/typescript-package/data)**: A lightweight **TypeScript** library for basic data management.
+- **[@typescript-package/collection](https://github.com/typescript-package/collection)**: A lightweight **TypeScript** library for data collection.
 
 ## Installation
 
@@ -70,139 +94,112 @@ npm install @typedly/data --save-peer
 
 ```typescript
 import {
-  // Data adapter constructor.
-  DataAdapterConstructor,
+  // Configuration
+  DataConfig,
+  DataSettings,
 
-  // Data Constructor.
-  AdaptableDataConstructor,
+// Inference.
+  InferAsync,
+  InferAsyncOf,
+  InferValue,
+
+  // Iterable.
+  IterValue,
+  IterableElement,
+
+  // Data.
   DataConstructor,
-
-  // Value Constructor.
-  ValueConstructor,
-
-  // Data adapter Interface.
-  DataAdapterShape,
-
-  // Data Interface.
-  AdaptableDataShape,
   DataShape,
 
-  // Value Interface.
-  ValueShape,
-
-  // Adaptable data constructor input and tuple.
-  AdaptableDataConstructorInput,
-  AdaptableDataConstructorTuple,
-
-  // Data constructor input and tuple.
+  // Return types
+  AsyncReturn,
+  // Input types
   DataConstructorInput,
   DataConstructorTuple,
 
-  // Type.
-  AsyncReturn,
-  IterValue
+  // Value.
+  ValueConstructor,
+  ValueShape,
 } from '@typedly/data';
 ```
 
-### Constructor
+### Configuration
 
-#### `AdaptableDataConstructor`
+#### `DataConfig`
 
-The constructor interface for data types with adapter.
-
-```typescript
-import { AdaptableDataConstructor } from '@typedly/data';
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/adaptable-data.constructor.ts)
-
-#### `DataAdapterConstructor`
-
-The constructor interface for data adapters.
+The type for the data configuration, which can be either a full configuration object of `C` or just an async flag.
 
 ```typescript
-import { DataAdapterConstructor } from '@typedly/data';
+import { DataConfig } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/data-adapter.constructor.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/type/data.config.ts)
 
-#### `DataConstructor`
+#### `DataSettings`
 
-The constructor interface for data types.
+The settings for a data type.
 
 ```typescript
-import { DataConstructor } from '@typedly/data';
+import { DataSettings } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/data.constructor.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.settings.ts)
 
-#### `ValueConstructor`
+### Inference
+
+#### `InferAsyncOf`
+
+Infers the async flag from a tuple of arguments, returning true if any of the arguments has an async flag set to true.
 
 ```typescript
-import { ValueConstructor } from '@typedly/data';
+import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/constructor/lib/value.constructor.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/infer-async-of.type.ts)
 
-### Interface
+#### `InferAsync`
 
-#### `AdaptableDataShape`
-
-The shape of a data type with optional adapter.
+Infers the async flag from the settings `DataSettings` or shape `DataShape`.
 
 ```typescript
-import { AdaptableDataShape } from '@typedly/data';
+import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/adaptable-data.shape.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/infer-async.type.ts)
 
-#### `DataAdapterShape`
+#### `InferValue`
 
-The adapter interface for data types.
+Infers the value type from a data shape interface.
 
 ```typescript
-import { DataAdapterShape } from '@typedly/data';
+import { InferAsync } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data-adapter.shape.ts)
+[Source](https://github.com/typedly/data/blob/main/src/inference/infer-value.type.ts)
 
-#### `DataShape`
+### Iterable
 
-The shape of a `Data` type.
+#### `IterElement`
+
+The iterate element type.
 
 ```typescript
-import { DataShape } from '@typedly/data';
+import { IterElement } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data.shape.ts)
+[Source](https://github.com/typedly/data/blob/main/src/iterable/iter-element.type.ts)
 
-#### `ValueShape`
+#### `IterValue`
 
-The shape of a `Value` type.
+The iterated value type.
 
 ```typescript
-import { ValueShape } from '@typedly/data';
+import { IterValue } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/value-shape.interface.ts)
+[Source](https://github.com/typedly/data/blob/main/src/iterable/iter-value.type.ts)
 
-### Type
-
-#### `AdaptableDataConstructorInput`
-
-```typescript
-import { AdaptableDataConstructorInput } from '@typedly/data';
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/adaptable-data-constructor-input.type.ts)
-
-#### `AdaptableDataConstructorTuple`
-
-```typescript
-import { AdaptableDataConstructorTuple } from '@typedly/data';
-```
-
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/adaptable-data-constructor-tuple.type.ts)
+### Data
 
 #### `AsyncReturn`
 
@@ -234,15 +231,45 @@ import { DataConstructorTuple } from '@typedly/data';
 
 [Source](https://github.com/typedly/data/blob/main/src/lib/type/data-constructor-tuple.type.ts)
 
-#### `IterValue`
+#### `DataConstructor`
 
-The iterated value type.
+The constructor interface for data types.
 
 ```typescript
-import { IterValue } from '@typedly/data';
+import { DataConstructor } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/iter-value.type.ts)
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.constructor.ts)
+
+#### `DataShape`
+
+The shape of a `Data` type.
+
+```typescript
+import { DataShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/lib/interface/data.shape.ts)
+
+### Value
+
+#### `ValueConstructor`
+
+```typescript
+import { ValueConstructor } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/value/lib/value.constructor.ts)
+
+#### `ValueShape`
+
+The shape of a `Value` type.
+
+```typescript
+import { ValueShape } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/value/lib/value-shape.interface.ts)
 
 ## Contributing
 
@@ -309,11 +336,7 @@ How do I know when to release 1.0.0?
 
 ## License
 
-MIT © typedly ([license][typedly-license])
-
-## Related packages
-
-- **[@typescript-package/collection](https://github.com/typescript-package/collection)**: A lightweight TypeScript library for data collection.
+MIT © typedly ([license][package-license])
 
 ## Packages
 
@@ -329,23 +352,41 @@ MIT © typedly ([license][typedly-license])
 - **[@typescript-package/wrapped-descriptor](https://github.com/typescript-package/wrapped-descriptor)**: A lightweight **TypeScript** library for wrapped property descriptor.
 - **[@xtypescript/property](https://github.com/xtypescript/property)** - A comprehensive, reactive **TypeScript** library for precise and extensible object property control.
 
+<!-- Funding -->
+[github-badge-sponsor]: https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/angular-package
+[github-sponsor-link]: https://github.com/sponsors/angular-package
+[patreon-badge]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dangularpackage%26type%3Dpatrons&style=flat
+[patreon-link]: https://www.patreon.com/join/angularpackage/checkout?fan_landing=true&rid=0
+
+<!-- Discord -->
+[discord-badge]: https://img.shields.io/discord/925168966098386944?style=social&logo=discord&label=Discord
+[discord-channel]: https://discord.com/invite/rUCR2CW75G
+
+<!-- Gitter -->
+[gitter-badge]: https://img.shields.io/gitter/room/angular-package/ap-sass?style=social&logo=gitter
+[gitter-chat]: https://app.gitter.im/#/room/#ap-sass:gitter.im
+
+<!-- Twitter -->
+[twitter-badge]: https://img.shields.io/twitter/follow/angularpackage?label=%40angularpackage&style=social
+[twitter-follow]: https://twitter.com/angularpackage
+
 <!-- This package: typedly  -->
   <!-- GitHub: badges -->
-  [typedly-badge-issues]: https://img.shields.io/github/issues/typedly/data
-  [typedly-badge-forks]: https://img.shields.io/github/forks/typedly/data
-  [typedly-badge-stars]: https://img.shields.io/github/stars/typedly/data
-  [typedly-badge-license]: https://img.shields.io/github/license/typedly/data
+  [package-badge-issues]: https://img.shields.io/github/issues/typedly/data
+  [package-badge-forks]: https://img.shields.io/github/forks/typedly/data
+  [package-badge-stars]: https://img.shields.io/github/stars/typedly/data
+  [package-badge-license]: https://img.shields.io/github/license/typedly/data
   <!-- GitHub: badges links -->
-  [typedly-issues]: https://github.com/typedly/data/issues
-  [typedly-forks]: https://github.com/typedly/data/network
-  [typedly-license]: https://github.com/typedly/data/blob/master/LICENSE
-  [typedly-stars]: https://github.com/typedly/data/stargazers
+  [package-issues]: https://github.com/typedly/data/issues
+  [package-forks]: https://github.com/typedly/data/network
+  [package-license]: https://github.com/typedly/data/blob/master/LICENSE
+  [package-stars]: https://github.com/typedly/data/stargazers
 <!-- This package -->
 
 <!-- Package: typedly -->
   <!-- npm -->
-  [typedly-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
-  [typedly-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
+  [package-npm-badge-svg]: https://badge.fury.io/gh/typedly%2Fdata.svg
+  [package-npm-badge]: https://badge.fury.io/js/@typedly%2Fdata
 
 <!-- GIT -->
 [git-semver]: http://semver.org/
