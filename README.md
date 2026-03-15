@@ -133,7 +133,7 @@ The type for the data configuration, which can be either a full configuration ob
 import { DataConfig } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/type/data.config.ts)
+[Source](https://github.com/typedly/data/blob/main/src/configuration/lib/data.config.ts)
 
 #### `DataSettings`
 
@@ -143,7 +143,7 @@ The settings for a data type.
 import { DataSettings } from '@typedly/data';
 ```
 
-[Source](https://github.com/typedly/data/blob/main/src/lib/interface/lib/data.settings.ts)
+[Source](https://github.com/typedly/data/blob/main/src/configuration/lib/data.settings.ts)
 
 ### Inference
 
