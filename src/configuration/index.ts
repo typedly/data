@@ -1,1 +1,6 @@
-export type { DataConfig, DataSettings } from './lib';
+export type {
+  CacheableDataSettings,
+  CacheableSettings,
+  DataConfig,
+  DataSettings,
+} from './lib';

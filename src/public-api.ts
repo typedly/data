@@ -2,6 +2,8 @@
  * Public API Surface of data
  */
 export type {
+  CacheableDataSettings,
+  CacheableSettings,
   DataConfig,
   DataSettings,
 } from './configuration';

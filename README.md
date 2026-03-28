@@ -39,6 +39,8 @@ A **TypeScript** type definitions package for [**@typescript-package/data**](htt
 - [Installation](#installation)
 - [Api](#api)
   - [Configuration](#configuration)
+    - [`CacheableDataSettings`](#cacheabledatasettings)
+    - [`CacheableSettings`](#cacheablesettings)
     - [`DataConfig`](#dataconfig)
     - [`DataSettings`](#datasettings)
   - [Data](#data)
@@ -95,6 +97,8 @@ npm install @typedly/data --save-peer
 ```typescript
 import {
   // Configuration
+  CacheableDataSettings,
+  CacheableSettings,
   DataConfig,
   DataSettings,
 
@@ -124,6 +128,26 @@ import {
 ```
 
 ### Configuration
+
+#### `CacheableDataSettings`
+
+The cacheable data settings type combines the data settings with the cacheable settings, allowing for optional or required asynchronous functions for fetching and updating the data value based on the read-only flag.
+
+```typescript
+import { CacheableDataSettings } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/configuration/lib/cacheable.data.settings.ts)
+
+#### `CacheableSettings`
+
+The cacheable settings interface defines the structure for configuring cacheable data operations, including optional asynchronous functions for clearing, destroying, fetching, and updating the data value.
+
+```typescript
+import { CacheableSettings } from '@typedly/data';
+```
+
+[Source](https://github.com/typedly/data/blob/main/src/configuration/lib/cacheable.settings.ts)
 
 #### `DataConfig`
 
