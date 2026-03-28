@@ -11,4 +11,10 @@ export interface DataSettings<R extends boolean = false> {
    * @type {?R}
    */
   async?: R;
+
+  /**
+   * @description Optional tag to categorize the data type.
+   * @type {?string}
+   */
+  tag?: string;
 }
