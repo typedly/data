@@ -1,5 +1,3 @@
-// Type.
-import { InferAsync } from "./infer-async.type";
 /**
  * @description Infers the async flag from a tuple of arguments, returning true if any of the arguments has an async flag set to true.
  * @export
@@ -8,7 +6,7 @@ import { InferAsync } from "./infer-async.type";
  */
 export type InferAsyncOf<A extends readonly any[], F = false> =
   A extends [infer Head, ...infer Tail]
-    ? InferAsync<Head> extends true
-      ? true
+    ? Head extends { async?: infer S extends boolean }
+      ? S
       : InferAsyncOf<Tail>
     : F;
